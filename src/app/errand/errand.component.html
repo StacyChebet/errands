@@ -1,0 +1,21 @@
+<h1>My Errands</h1>
+<hr>
+<div class="container">
+    <div class = "row">
+        <app-errand-form (addErrand)="addNewErrand($event)"></app-errand-form>
+    </div>
+    <div class="row" *ngFor="let errand of errands;let i = 'index'">
+        <div class="row">
+            <h4 id="{{i}}" appStrikethrough>{{errand.name}} due on {{errand.completeDate|date|uppercase}}</h4><br/>
+            <button class="btn btn-primary" (click)='toggleDetails(i)'>Toggle Details</button>
+        </div>
+        
+        <div class="row" *ngIf="errand.showDescription">
+        <app-errand-details  [errand]='errand' (isComplete)= 'deleteErrand($event,i)'></app-errand-details>
+    </div>
+    
+</div>
+
+</div>
+
+<p *ngIf='errands.length > 5'>You have too many errands</p>
